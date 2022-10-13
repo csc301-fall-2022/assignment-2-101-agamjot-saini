@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    <form action="/" method="POST">
+        Item Name
+        <input type="text" required name="name" maxlength="20"><br>
+        
+        Item Price
+        <input type="number" required name="price" min="0" value="0" step="0.01"><br>
+
+        Quantity
+        <input type="number" required name="quantity" min="1" max="50" value="1"><br>
+
+        Item Discount (%)
+        <input type="number" required name="discount" min="0" max="100" value="0" step="0.01"><br>
+
+        Item Tax (%)
+        <input type="number" required name="tax" min="0" max="100" value="13" step="0.01"><br>
+
+        <button type="submit" value="submit">Add Item</button>
+    </form>
+
+
+    <div>
+        <table id="table" border="1">
+            <tr>
+                <th></th>
+                <th>Item Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Price Before Tax</th>
+                <th>Price After Tax</th>
+            </tr>
+
+            {% for item in info %}
+            <tr>
+                <td>
+                    {% for i in item %}
+                        
+                        <td>{{i}}</td>
+
+                    {% endfor %}
+                </td>
+                <!-- <td input type="button" onclick="removeItem(this.parentNode.rowIndex)">Remove Item</td> -->
+                <td input type="button" onclick="removeItem(this.parentNode.rowIndex)">Remove Item</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+
+        <script type="text/javascript">
+            function removeItem(i){
+                // REMOVE THIS ROW'S LIST FROM *item_list* IN SERVER.PY?
+                // i is row index, so i can be used to index into item_list
+                // and REMOVE that list from item_list 
+                document.getElementById('table').deleteRow(i)
+            }
+        </script>
+        
+    </div>
+    
+    
+
+<!-- FOR ITEM IN INFO (THE ITEM LIST), LIST THE ITEM -->
+
+
+
+
+
+
+    
+</body>
+</html>
