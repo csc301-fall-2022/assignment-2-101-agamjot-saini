@@ -69,10 +69,10 @@ def Calculate():
     # else:
     #     return render_template('checkout.html')
 
-def removeItem(i):
-    item_list.pop(i)
+# def removeItem(i):
+#     item_list.pop(i)
     
-    return render_template('checkout.html', info=item_list)
+#     return render_template('checkout.html', info=item_list)
 
 
 if __name__ == "__main__":
