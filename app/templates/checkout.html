@@ -25,10 +25,13 @@
         <input type="number" required name="tax" min="0" max="100" value="13" step="0.01"><br>
 
         <button type="submit" value="submit">Add Item</button>
+
     </form>
 
 
+
     <div>
+
         <table id="table" border="1">
             <tr>
                 <th></th>
@@ -48,8 +51,8 @@
 
                     {% endfor %}
                 </td>
-                <!-- <td input type="button" onclick="removeItem(this.parentNode.rowIndex)">Remove Item</td> -->
                 <td input type="button" onclick="removeItem(this.parentNode.rowIndex)">Remove Item</td>
+                <!-- <td input type="button" onclick="ExecPythonCommand('this.parentNode.rowIndex)">Remove Item</td> -->
 
             </tr>
             {% endfor %}
@@ -66,7 +69,11 @@
         
     </div>
     
-    
+    <div action="/total" method="POST">
+        <!-- <button type="submit" >Calculate Total</button><br> -->
+        <h4>Total Before and After Tax:</h4>
+        <h3>{{total_bill}}</h3>
+    </div>
 
 <!-- FOR ITEM IN INFO (THE ITEM LIST), LIST THE ITEM -->
 

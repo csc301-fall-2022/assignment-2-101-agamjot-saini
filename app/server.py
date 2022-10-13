@@ -50,9 +50,9 @@ def Calculate():
         # str(name) + ' ' + str(item_cost_before_tax) + ' ' + str(item_cost_after_tax)
         if item not in item_list:
             global before_tax
-            before_tax += item_cost_before_tax
+            before_tax += round(item_cost_before_tax, 2)
             global after_tax
-            after_tax += item_cost_after_tax
+            after_tax += round(item_cost_after_tax, 2)
 
             global i 
             i += 1
@@ -65,14 +65,26 @@ def Calculate():
     # item_list_index = len(item_list)
 
     # if i >= 5:
-    return render_template('checkout.html', info=item_list)
+    return render_template('checkout.html', info=item_list, total_bill=(before_tax, after_tax))
     # else:
     #     return render_template('checkout.html')
 
+# @app.route('/remove', methods=['POST', 'GET'])
 # def removeItem(i):
+#     bt = item_list[i].quantity*round(( item_list[i].price - (item_list[i].price)*(item_list[i].discount/100) ), 2 )
+#     at = round(bt * (1 + (item_list[i].tax/100)), 2)
+#     before_tax -= bt
+#     aftertax -= at
 #     item_list.pop(i)
     
-#     return render_template('checkout.html', info=item_list)
+#     return render_template('checkout.html', info=item_list, total_bill=(before_tax, after_tax))
+# @app.route('/total', methods=['POST', 'GET'])
+# def calculateTotal():
+#     # total = []
+#     # total.append(before_tax)
+#     # total.append(after_tax)
+#     return render_template('checkout.html', total_bill=(before_tax, after_tax), info=item_list)
+
 
 
 if __name__ == "__main__":
