@@ -27,12 +27,6 @@ def Calculate():
         item_cost_before_tax = round(quantity*round(( price - (price)*(discount/100) ), 2 ), 2)
         item_cost_after_tax = round(item_cost_before_tax * (1 + (tax/100)), 2)
 
-        # global before_tax
-        # before_tax += item_cost_before_tax
-        # global after_tax
-        # after_tax += item_cost_after_tax
-
-        # item = str(name + ' ' + price + ' ' + discount + ' ' + tax)
         item = []
         item.append(name)
         item.append(price)
@@ -40,14 +34,6 @@ def Calculate():
         item.append(item_cost_before_tax)
         item.append(item_cost_after_tax)
 
-        # global before_tax
-        # before_tax += item_cost_before_tax
-        # global after_tax
-        # after_tax += item_cost_after_tax
-
-        # item_list.append(item)
-
-        # str(name) + ' ' + str(item_cost_before_tax) + ' ' + str(item_cost_after_tax)
         if item not in item_list:
             global before_tax
             before_tax += round(item_cost_before_tax, 2)
@@ -57,7 +43,6 @@ def Calculate():
             global i 
             i += 1
             item_list.append(item)
-
 
         # item_list.append(before_tax)
         # item_list.append(after_tax)
@@ -69,18 +54,18 @@ def Calculate():
     # else:
     #     return render_template('checkout.html')
 
-@app.route('/remove', methods=['POST', 'GET'])
-def removeItem(i):
-    if request.method=='POST' and request.form:
-        global item_list
-        bt = item_list[i].quantity*round(( item_list[i].price - (item_list[i].price)*(item_list[i].discount/100) ), 2 )
-        at = round(bt * (1 + (item_list[i].tax/100)), 2)
-        global before_tax
-        before_tax -= bt
-        global after_tax
-        after_tax -= at
-        item_list.pop(i)
-    return render_template('checkout.html', total_bill=(before_tax, after_tax), info=item_list)
+# @app.route('/remove', methods=['POST', 'GET'])
+# def removeItem(i):
+#     if request.method=='POST' and request.form:
+#         global item_list
+#         bt = item_list[i].quantity*round(( item_list[i].price - (item_list[i].price)*(item_list[i].discount/100) ), 2 )
+#         at = round(bt * (1 + (item_list[i].tax/100)), 2)
+#         global before_tax
+#         before_tax -= bt
+#         global after_tax
+#         after_tax -= at
+#         item_list.pop(i)
+#     return render_template('checkout.html', total_bill=(before_tax, after_tax), info=item_list)
 
     
 #     return render_template('checkout.html', info=item_list, total_bill=(before_tax, after_tax))
