@@ -1,38 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Checkout Calculator</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+
 </head>
+
 <body>
-  
-    <form action="/" method="POST">
-        Item Name
-        <input type="text" required name="name" maxlength="20"><br>
-        
-        Item Price
-        <input type="number" required name="price" min="0" value="0" step="0.01"><br>
+    <div class="wrapper">
+        <div>
+        <div class="title">Checkout Calculator</div>
+            <form class="form" action="/" method="POST">
+                
+                <div class="inputfield">
+                <label>Item Name</label>
+                <input class="input" type="text" required autocomplete="off" name="name" maxlength="20"><br>
+                </div>
+                
+                <div class="inputfield">
+                <label>Item Price</label>
+                <input class="input" type="number" required name="price" min="0" max="1000000" value="0" step="0.01"><br>
+                </div>
 
-        Quantity
-        <input type="number" required name="quantity" min="1" max="50" value="1"><br>
+                <div class="inputfield">
+                <label>Quantity</label>
+                <input class="input" type="number" required name="quantity" min="1" max="50" value="1"><br>
+                </div>
 
-        Item Discount (%)
-        <input type="number" required name="discount" min="0" max="100" value="0" step="0.01"><br>
+                <div class="inputfield">
+                <label>Item Discount (%)</label>
+                <input class="input" type="number" required name="discount" min="0" max="100" value="0" step="0.01"><br>
+                </div>
 
-        Item Tax (%)
-        <input type="number" required name="tax" min="0" max="100" value="13" step="0.01"><br>
+                <div class="inputfield">
+                <label>Item Tax (%)</label>
+                <input class="input" type="number" required name="tax" min="0" max="100" value="13" step="0.01"><br>
+                </div>
 
-        <button type="submit" value="submit">Add Item</button>
+                <div class="container">
+                    <div class="child">
+                    <button class="button-30" role="button" type="submit" value="submit">Add Item</button>
+                    </div>
+                    <div class="child"action="/reset" method="POST">
+                        <!-- <button type="submit" >Calculate Total</button><br> -->
+                        <button class="button-30" type="submit" value="submit" onclick="window.location.href='{{ url_for( 'clear') }}';">Clear Item List</button>
+                    </div>
+                </div>
+            
+            </form>
+        </div>
+    </div>
 
-    </form>
 
+    <div class="wrapper2">
 
-
-    <div>
-
-        <table id="table" border="1">
+        <table id="table" class="list" border="1" >
             <tr>
                 <th></th>
                 <th>Item Name</th>
@@ -43,19 +69,26 @@
             </tr>
 
             {% for item in info %}
-            <tr>
-                <td>
-                    {% for i in item %}
-                        
-                        <td>{{i}}</td>
+                <tr>
+                    <td>
+                        {% for i in item %}
+                            
+                            <td>{{i}}</td>
 
-                    {% endfor %}
-                </td>
-                <td input type="button" onclick="removeItem(this.parentNode.rowIndex)">Remove Item</td>
-                <!-- <td input type="button" onclick="ExecPythonCommand('this.parentNode.rowIndex)">Remove Item</td> -->
+                        {% endfor %}
+                    </td>
+                    
+                    <td>
+                        <!-- <form action="/remove" method="POST">
+                            <button type="submit" value="submit" onclick="removeItem(this.parentNode.parentNode.parentNode.rowIndex)">Remove Item</button>
+                        </form> -->
+                        <button class="button-13" type="submit" value="submit" onclick="removeItem(this.parentNode.parentNode.rowIndex)">Remove Item</button>
 
-            </tr>
+                    </td>
+
+                </tr>
             {% endfor %}
+
         </table>
 
         <script type="text/javascript">
@@ -63,24 +96,18 @@
                 // REMOVE THIS ROW'S LIST FROM *item_list* IN SERVER.PY?
                 // i is row index, so i can be used to index into item_list
                 // and REMOVE that list from item_list 
+                
                 document.getElementById('table').deleteRow(i)
             }
         </script>
         
     </div>
     
-    <div action="/total" method="POST">
-        <!-- <button type="submit" >Calculate Total</button><br> -->
-        <h4>Total Before and After Tax:</h4>
-        <h3>{{total_bill}}</h3>
+    <div class="wrapper3" action="/" method="POST">
+        
+        <h4 class="center">Total Before Tax: {{total_bill[0]}}</h4>
+        <h3 class="center">Total After Tax: {{total_bill[1]}}</h3>
     </div>
-
-<!-- FOR ITEM IN INFO (THE ITEM LIST), LIST THE ITEM -->
-
-
-
-
-
 
     
 </body>
